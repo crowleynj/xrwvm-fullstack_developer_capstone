@@ -43,10 +43,13 @@ def login_user(request):
     # Try to check if provide credential can be authenticated
     user = authenticate(username=username, password=password)
     data = {"userName": username}
+    print(user)
+    print(data)
     if user is not None:
         # If user is valid, call login method to login current user
         login(request, user)
         data = {"userName": username, "status": "Authenticated"}
+        print(data)
     return JsonResponse(data)
 
 # Create a `logout_request` view to handle sign out request
@@ -89,7 +92,7 @@ def registration(request):
         return JsonResponse(data)
 
 #Update the `get_dealerships` render list of dealerships all by default, particular state if state is passed
-def get_dealerships(request, state="All"):
+def get_dealers(request, state="All"):
     if(state == "All"):
         endpoint = "/fetchDealers"
     else:
